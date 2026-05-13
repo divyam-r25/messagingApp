@@ -32,10 +32,19 @@ function readPort(): number {
 export const env = {
   PORT: readPort(),
   CORS_ORIGIN: optionalEnv("CORS_ORIGIN") ?? "http://localhost:5173",
-  JWT_SECRET: requireEnv("JWT_SECRET"),
-  DATABASE_URL: requireEnv("DATABASE_URL"),
-  CLOUDINARY_SECRET: requireEnv("CLOUDINARY_SECRET"),
 } as const;
+
+export function getJwtSecret(): string {
+  return requireEnv("JWT_SECRET");
+}
+
+export function getDatabaseUrl(): string {
+  return requireEnv("DATABASE_URL");
+}
+
+export function getCloudinarySecret(): string {
+  return requireEnv("CLOUDINARY_SECRET");
+}
 
 export type Env = typeof env;
 
