@@ -1,16 +1,13 @@
 import express from "express";
 import cors from "cors";
+import { corsOptions } from "./config/cors.js";
+import { healthRouter } from "./routes/health.routes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Server is healthy",
-  });
-});
+app.use("/api/health", healthRouter);
 
 export default app;
